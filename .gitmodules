@@ -1,3 +1,6 @@
 [submodule "uBlock0.chromium"]
 	path = uBlock0.chromium
 	url = https://github.com/gorhill/uBlock
+[submodule "ReaDark"]
+	path = ReaDark
+	url = https://github.com/KKrampis/ReaDark.git
