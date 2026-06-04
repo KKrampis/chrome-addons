@@ -4,3 +4,6 @@
 [submodule "ReaDark"]
 	path = ReaDark
 	url = https://github.com/KKrampis/ReaDark.git
+[submodule "zotero-connectors"]
+	path = zotero-connectors
+	url = https://github.com/zotero/zotero-connectors
