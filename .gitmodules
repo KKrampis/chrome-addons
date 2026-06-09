@@ -7,3 +7,9 @@
 [submodule "zotero-connectors"]
 	path = zotero-connectors
 	url = https://github.com/zotero/zotero-connectors
+[submodule "inoxunpack"]
+	path = inoxunpack
+	url = https://github.com/gcarq/inoxunpack.git
+[submodule "proton-vpn-browser-extension"]
+	path = proton-vpn-browser-extension
+	url = https://github.com/ProtonVPN/proton-vpn-browser-extension
