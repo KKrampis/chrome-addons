@@ -13,3 +13,6 @@
 [submodule "proton-vpn-browser-extension"]
 	path = proton-vpn-browser-extension
 	url = https://github.com/ProtonVPN/proton-vpn-browser-extension
+[submodule "obsidian-clipper"]
+	path = obsidian-clipper
+	url = https://github.com/obsidianmd/obsidian-clipper.git
