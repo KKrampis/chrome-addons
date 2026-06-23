@@ -124,6 +124,21 @@
       word-break: break-all;
     }
 
+    .picker-bar { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+    .pick-action-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; color: var(--muted); font-size: 11px; cursor: pointer; padding: 3px 10px; font-family: var(--sans); transition: all 0.15s; flex-shrink: 0; }
+    .pick-action-btn:hover { color: var(--text); background: var(--border); }
+    .pick-summary { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-left: auto; }
+    .group-list { max-height: 180px; overflow-y: auto; margin-bottom: 8px; }
+    .group-list::-webkit-scrollbar { width: 4px; }
+    .group-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .group-pick-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 7px; background: var(--surface2); border: 1px solid var(--border); margin-bottom: 3px; cursor: pointer; user-select: none; transition: background 0.12s; }
+    .group-pick-item:hover { background: var(--border); }
+    .group-pick-item input[type=checkbox] { accent-color: var(--accent); width: 13px; height: 13px; cursor: pointer; flex-shrink: 0; }
+    .group-pick-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .group-pick-name { font-size: 12px; font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .group-pick-count { font-family: var(--mono); font-size: 10px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 1px 7px; border-radius: 20px; flex-shrink: 0; }
+    .win-pick-label { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; padding: 6px 2px 3px; }
+
     .footer { padding: 10px 14px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
     .last-sync { font-family: var(--mono); font-size: 10px; color: var(--muted); }
     .view-btn { display: flex; align-items: center; gap: 5px; background: none; border: none; color: var(--accent); font-family: var(--sans); font-size: 11px; font-weight: 500; cursor: pointer; padding: 4px 8px; border-radius: 5px; transition: background 0.15s; }
@@ -213,8 +228,20 @@
 
   <div class="section-label">Or paste content</div>
   <textarea class="import-area" id="importText" placeholder="Paste .tabvault YAML or JSON here…"></textarea>
-  <button class="btn btn-primary" id="btnImportOpen">↗ Open All Tabs (with Groups)</button>
-  <button class="btn btn-secondary" id="btnImportPreview">👁 Preview</button>
+  <button class="btn btn-secondary" id="btnParseContent">⊞ Load Groups</button>
+
+  <div id="groupPickerSection" style="display:none">
+    <div class="section-label" style="margin-top:10px">Select groups to open</div>
+    <div class="picker-bar">
+      <button class="pick-action-btn" id="btnSelectAll">All</button>
+      <button class="pick-action-btn" id="btnSelectNone">None</button>
+      <span class="pick-summary" id="pickSummary"></span>
+    </div>
+    <div class="group-list" id="groupList"></div>
+    <button class="btn btn-primary" id="btnOpenSelected">↗ Open Selected Groups</button>
+    <button class="btn btn-secondary" id="btnOpenAll">↗ Open All Tabs</button>
+  </div>
+
   <div id="importStatus" class="status"></div>
 </div>
 
