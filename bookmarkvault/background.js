@@ -102,7 +102,10 @@ async function syncPush(binId, keyOverrides = {}) {
 
   const json = await res.json();
   const newBinId = json.metadata?.id || binId;
-  await chrome.storage.local.set({ syncBinId: newBinId, lastSyncedAt: new Date().toISOString() });
+  const h = await chrome.storage.local.get("syncHistory");
+  const hist = h.syncHistory || [];
+  hist.unshift({ binId: newBinId, pushedAt: new Date().toISOString(), device: data.device, count: data.totalCount });
+  await chrome.storage.local.set({ syncBinId: newBinId, lastSyncedAt: new Date().toISOString(), syncHistory: hist.slice(0, 10) });
   return { binId: newBinId, data };
 }
 

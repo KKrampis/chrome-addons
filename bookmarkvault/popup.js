@@ -32,6 +32,8 @@ function downloadFile(content, filename, mime) {
   URL.revokeObjectURL(url);
 }
 
+function escHtml(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
 async function getAndSaveKeys() {
   const masterKey = $('masterKeyInput').value.trim();
   const accessKey = $('accessKeyInput').value.trim();
@@ -45,6 +47,37 @@ function switchToPanel(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelector(`.nav-btn[data-panel="${name}"]`).classList.add('active');
   $(`panel-${name}`).classList.add('active');
+}
+
+// ── Sync history ─────────────────────────────────────────────────
+function renderSyncHistory(history) {
+  const list = $('syncHistoryList');
+  if (!list) return;
+  if (!history || !history.length) {
+    list.innerHTML = '<div class="history-empty">No push history yet</div>';
+    return;
+  }
+  list.innerHTML = '';
+  history.forEach(entry => {
+    const row = document.createElement('div');
+    row.className = 'history-row';
+    const d = new Date(entry.pushedAt);
+    const dateStr = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' · ' +
+                    d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+    row.innerHTML =
+      `<div class="history-meta">
+         <span class="history-date">${escHtml(dateStr)}</span>
+         <span class="history-device">${escHtml(entry.device || 'Unknown')}</span>
+       </div>
+       <span class="history-count">${entry.count ?? '—'} bookmarks</span>
+       <button class="history-pull-btn" data-bin="${escHtml(entry.binId)}">↓ Pull</button>`;
+    row.querySelector('.history-pull-btn').addEventListener('click', e => {
+      const binId = e.currentTarget.dataset.bin;
+      $('pullBinId').value = binId;
+      doPull(binId);
+    });
+    list.appendChild(row);
+  });
 }
 
 // ── Folder picker ─────────────────────────────────────────────────
@@ -141,12 +174,13 @@ async function init() {
     $('statRoots').textContent = (res.data.roots || []).length;
   }
 
-  const s = await chrome.storage.local.get(['syncBinId', 'masterKey', 'accessKey', 'deviceName', 'lastSyncedAt']);
+  const s = await chrome.storage.local.get(['syncBinId', 'masterKey', 'accessKey', 'deviceName', 'lastSyncedAt', 'syncHistory']);
   if (s.syncBinId) { $('syncIdVal').textContent = s.syncBinId; $('syncIdDisplay').style.display = 'block'; $('pullBinId').value = s.syncBinId; }
   if (s.masterKey) $('masterKeyInput').value = s.masterKey;
   if (s.accessKey) $('accessKeyInput').value = s.accessKey;
   if (s.deviceName) $('deviceNameInput').value = s.deviceName;
   if (s.lastSyncedAt) $('lastSync').textContent = `Synced ${new Date(s.lastSyncedAt).toLocaleTimeString()}`;
+  renderSyncHistory(s.syncHistory || []);
 }
 
 // ── Export ────────────────────────────────────────────────────────
@@ -197,8 +231,7 @@ $('btnCopySyncId').addEventListener('click', () => {
 });
 
 // ── Sync — Pull ───────────────────────────────────────────────────
-$('btnPull').addEventListener('click', async () => {
-  const binId = $('pullBinId').value.trim();
+async function doPull(binId) {
   if (!binId) return setStatus('syncStatus', 'err', '✗ Enter a Sync ID (Bin ID)');
   const { masterKey, accessKey } = await getAndSaveKeys();
   setStatus('syncStatus', 'info', '↓ Pulling bookmarks…');
@@ -210,7 +243,9 @@ $('btnPull').addEventListener('click', async () => {
   switchToPanel('import');
   showFolderPicker(data);
   setStatus('importStatus', 'ok', `✓ Pulled from "${data.device || 'Unknown'}" — select folders below`);
-});
+}
+
+$('btnPull').addEventListener('click', () => doPull($('pullBinId').value.trim()));
 
 // ── Import — File picker ──────────────────────────────────────────
 function readFileAsText(file) {

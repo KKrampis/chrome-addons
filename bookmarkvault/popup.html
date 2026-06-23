@@ -101,6 +101,18 @@
     .root-pick-label { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; padding: 8px 2px 4px; }
     .root-pick-label:first-child { padding-top: 0; }
 
+    .sync-history-list { max-height: 154px; overflow-y: auto; margin-bottom: 4px; }
+    .sync-history-list::-webkit-scrollbar { width: 4px; }
+    .sync-history-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .history-empty { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: center; padding: 10px 0 4px; }
+    .history-row { display: flex; align-items: center; gap: 8px; padding: 7px 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; margin-bottom: 3px; }
+    .history-meta { flex: 1; min-width: 0; }
+    .history-date { font-family: var(--mono); font-size: 10px; color: var(--muted); display: block; line-height: 1.4; }
+    .history-device { font-size: 11px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; line-height: 1.4; }
+    .history-count { font-family: var(--mono); font-size: 10px; color: var(--muted); flex-shrink: 0; white-space: nowrap; }
+    .history-pull-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; color: var(--accent); font-size: 11px; cursor: pointer; padding: 3px 8px; font-family: var(--sans); font-weight: 500; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .history-pull-btn:hover { background: var(--border); color: var(--text); }
+
     .footer { padding: 10px 14px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
     .last-sync { font-family: var(--mono); font-size: 10px; color: var(--muted); }
   </style>
@@ -169,6 +181,9 @@
   <div class="section-label">Pull from another device</div>
   <input class="input" id="pullBinId" placeholder="Paste Sync ID from other browser…" />
   <button class="btn btn-secondary" id="btnPull">↓ Pull Bookmarks</button>
+
+  <div class="section-label" style="margin-top:12px">Push history</div>
+  <div class="sync-history-list" id="syncHistoryList"></div>
 
   <div id="syncStatus" class="status"></div>
 </div>
