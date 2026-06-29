@@ -1,0 +1,64 @@
+{
+  "name": "Reader View",
+  "description": "__MSG_description__",
+  "default_locale": "en",
+  "version": "0.5.4",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "https://www.ibm.com/demos/*"
+  ],
+  "optional_permissions": [
+    "*://*/*",
+    "webNavigation",
+    "https://translate.google.com/"
+  ],
+  "background": {
+    "persist": false,
+    "scripts": [
+      "config.js",
+      "common.js"
+    ]
+  },
+  "page_action": {
+    "browser_style": true,
+    "show_matches": ["http://*/*", "https://*/*", "file://*/*"],
+    "default_icon": {
+      "16": "data/icons/16.png",
+      "32": "data/icons/32.png",
+      "48": "data/icons/48.png"
+    }
+  },
+  "homepage_url": "https://add0n.com/chrome-reader-view.html",
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png",
+    "256": "data/icons/256.png",
+    "512": "data/icons/512.png"
+  },
+  "options_ui": {
+    "page": "data/options/index.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "_execute_browser_action": {},
+    "toggle-reader-view": {
+      "description": "Toggle the Reader View"
+    }
+  },
+  "web_accessible_resources": [
+    "/data/reader/template.html"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "{2495d258-41e7-4cd5-bc7d-ac15981f064e}",
+      "strict_min_version": "79.0"
+    }
+  }
+}
