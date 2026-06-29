@@ -16,3 +16,9 @@
 [submodule "obsidian-clipper"]
 	path = obsidian-clipper
 	url = https://github.com/obsidianmd/obsidian-clipper.git
+[submodule "tabvault"]
+	path = tabvault
+	url = https://github.com/KKrampis/tabvault.git
+[submodule "bookmarkvault"]
+	path = bookmarkvault
+	url = https://github.com/KKrampis/bookmarkvault.git
