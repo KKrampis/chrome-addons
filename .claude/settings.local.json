@@ -3,7 +3,26 @@
     "allow": [
       "Bash(git init)",
       "Bash(gh repo create chrome-addons --private)",
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git stash *)",
+      "Bash(git read-tree *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(python3 -c \"from PIL import Image; print\\('PIL available'\\)\")",
+      "Bash(python3 -c \"import cairosvg; print\\('cairosvg available'\\)\")",
+      "Bash(python3 -c \"import struct, zlib; print\\('stdlib only'\\)\")",
+      "Bash(rsvg-convert -w 128 -h 128 icon.svg -o icon128.png)",
+      "Bash(rsvg-convert -w 48 -h 48 icon.svg -o icon48.png)",
+      "Bash(rsvg-convert -w 16 -h 16 icon.svg -o icon16.png)",
+      "Bash(git -C /Users/bioitx/Documents/GitHub/chrome-addons add bookmarkvault/icons/)",
+      "Bash(git -C /Users/bioitx/Documents/GitHub/chrome-addons status)",
+      "Bash(git -C /Users/bioitx/Documents/GitHub/chrome-addons commit -m ' *)",
+      "Bash(git -C /Users/bioitx/Documents/GitHub/chrome-addons push)",
+      "Bash(git *)",
+      "Bash(gh auth *)",
+      "Bash(gh repo *)",
+      "Bash(cp -r /Users/bioitx/Documents/GitHub/chrome-addons/tabvault /tmp/tabvault-init)",
+      "Bash(cp -r /Users/bioitx/Documents/GitHub/chrome-addons/bookmarkvault /tmp/bookmarkvault-init)"
     ],
     "deny": [],
     "ask": []
