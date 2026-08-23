@@ -24,4 +24,4 @@
 	url = https://github.com/KKrampis/bookmarkvault.git
 [submodule "vimdf"]
 	path = vimdf
-	url = https://github.com/tatsukamijo/vimdf
+	url = https://github.com/KKrampis/vimdf
