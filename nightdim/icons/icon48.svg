@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="22" fill="#0e0e16"/>
+  <!-- Crescent moon: large circle minus offset circle -->
+  <circle cx="56" cy="64" r="34" fill="#c8b8f0"/>
+  <circle cx="74" cy="50" r="30" fill="#0e0e16"/>
+  <!-- Stars -->
+  <circle cx="102" cy="30" r="3.5" fill="#c8b8f0"/>
+  <circle cx="112" cy="52" r="2.2" fill="#c8b8f0"/>
+  <circle cx="96" cy="18" r="2" fill="#c8b8f0"/>
+  <circle cx="115" cy="38" r="1.5" fill="#c8b8f0"/>
+</svg>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NightDim</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <span class="logo">🌙</span>
+    <span class="title">NightDim</span>
+  </header>
+
+  <div class="row toggle-row">
+    <span class="label">Dim page</span>
+    <label class="switch">
+      <input type="checkbox" id="toggleEnabled">
+      <span class="track"></span>
+    </label>
+  </div>
+
+  <div class="slider-section" id="sliderSection">
+    <div class="slider-header">
+      <span class="label">Darkness</span>
+      <span class="value" id="dimValue">40%</span>
+    </div>
+    <input type="range" id="dimSlider" min="5" max="90" step="1" value="40">
+    <div class="presets">
+      <button class="preset" data-level="20">Light</button>
+      <button class="preset" data-level="40">Medium</button>
+      <button class="preset" data-level="65">Dark</button>
+      <button class="preset" data-level="85">Night</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
