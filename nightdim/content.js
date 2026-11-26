@@ -36,12 +36,21 @@ function applyState(enabled, dimLevel) {
   }
 }
 
-chrome.storage.sync.get(['enabled', 'dimLevel'], ({ enabled = false, dimLevel = 40 }) => {
-  applyState(enabled, dimLevel);
+// enabled is never persisted — always starts false on each page load
+let currentEnabled = false;
+let currentDimLevel = 40;
+
+chrome.storage.sync.get(['dimLevel'], ({ dimLevel = 40 }) => {
+  currentDimLevel = dimLevel;
+  // overlay stays off on load
 });
 
-chrome.runtime.onMessage.addListener((msg) => {
+chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg.type === 'NIGHTDIM_UPDATE') {
-    applyState(msg.enabled, msg.dimLevel);
+    currentEnabled = msg.enabled;
+    currentDimLevel = msg.dimLevel;
+    applyState(currentEnabled, currentDimLevel);
+  } else if (msg.type === 'NIGHTDIM_GET_STATE') {
+    sendResponse({ enabled: currentEnabled, dimLevel: currentDimLevel });
   }
 });

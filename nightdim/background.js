@@ -1,3 +1,3 @@
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ enabled: false, dimLevel: 40 });
+  chrome.storage.sync.set({ dimLevel: 40 });
 });

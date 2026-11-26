@@ -44,14 +44,29 @@ function broadcast() {
 }
 
 function save() {
-  chrome.storage.sync.set({ enabled: state.enabled, dimLevel: state.dimLevel });
+  // Never persist enabled — only remember dim level
+  chrome.storage.sync.set({ dimLevel: state.dimLevel });
   broadcast();
 }
 
-// Load saved state
-chrome.storage.sync.get(['enabled', 'dimLevel'], ({ enabled = false, dimLevel = 40 }) => {
-  state = { enabled, dimLevel };
-  updateUI();
+// Ask the content script for its live state; fall back to storage for dimLevel
+chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
+  if (!tab) return;
+  chrome.tabs.sendMessage(tab.id, { type: 'NIGHTDIM_GET_STATE' })
+    .then((response) => {
+      state = {
+        enabled: response?.enabled ?? false,
+        dimLevel: response?.dimLevel ?? 40,
+      };
+      updateUI();
+    })
+    .catch(() => {
+      // Content script not yet running on this tab — load only dimLevel
+      chrome.storage.sync.get(['dimLevel'], ({ dimLevel = 40 }) => {
+        state = { enabled: false, dimLevel };
+        updateUI();
+      });
+    });
 });
 
 toggle.addEventListener('change', () => {
