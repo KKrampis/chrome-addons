@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AISearch Vault – Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+<div class="page">
+  <header>
+    <span class="logo">🔍</span>
+    <h1>AISearch <span>Vault</span> Settings</h1>
+  </header>
+
+  <section>
+    <h2>JSONbin</h2>
+    <p class="help">Create a free account at <a href="https://jsonbin.io" target="_blank">jsonbin.io</a>. Copy your Master Key from Account → API Keys.</p>
+    <div class="field">
+      <label>Master Key</label>
+      <input type="password" id="jsonbinKey" placeholder="$2b$10$...">
+    </div>
+    <div class="field">
+      <label>Bin ID <span class="note">(auto-filled after first save)</span></label>
+      <input type="text" id="jsonbinId" placeholder="64f3a...">
+    </div>
+  </section>
+
+  <section>
+    <h2>GitHub</h2>
+    <p class="help">Create a Personal Access Token with <code>repo</code> scope at GitHub → Settings → Developer settings → Tokens.</p>
+    <div class="field">
+      <label>Personal Access Token</label>
+      <input type="password" id="githubToken" placeholder="ghp_...">
+    </div>
+    <div class="field row">
+      <div>
+        <label>Owner (username or org)</label>
+        <input type="text" id="githubOwner" placeholder="your-username">
+      </div>
+      <div>
+        <label>Repository</label>
+        <input type="text" id="githubRepo" placeholder="my-research">
+      </div>
+    </div>
+    <div class="field">
+      <label>File path in repo <span class="note">(default: aisearch-vault.json)</span></label>
+      <input type="text" id="githubPath" placeholder="aisearch-vault.json">
+    </div>
+  </section>
+
+  <section>
+    <h2>Privacy Shield</h2>
+    <p class="help">When enabled, blocks Google Analytics, DoubleClick, and ad-tracking requests, and periodically clears Google tracking cookies (NID, 1P_JAR, _ga, etc.). Can be toggled from the popup.</p>
+    <div class="toggle-row">
+      <span>Enable Privacy Shield</span>
+      <label class="switch">
+        <input type="checkbox" id="privacyMode">
+        <span class="track"></span>
+      </label>
+    </div>
+    <div class="cookies-row">
+      <button id="cleanNow">Clear tracking cookies now</button>
+      <span id="cleanStatus" class="clean-status" hidden></span>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button id="saveBtn" class="btn-primary">Save settings</button>
+    <span id="savedMsg" class="saved-msg" hidden>Saved.</span>
+  </div>
+</div>
+<script src="options.js"></script>
+</body>
+</html>

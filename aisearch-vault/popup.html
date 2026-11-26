@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AISearch Vault</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span class="logo">🔍</span>
+    <span class="brand-name">AISearch <span class="accent">Vault</span></span>
+  </div>
+  <div class="header-btns">
+    <button id="privacyBtn" class="icon-btn" title="Privacy Shield">🛡</button>
+    <button id="optionsBtn" class="icon-btn" title="Settings">⚙</button>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="capture">Capture</button>
+  <button class="tab" data-tab="library">Library <span id="libCount" class="badge" hidden></span></button>
+</nav>
+
+<!-- Capture tab -->
+<div id="captureTab" class="tab-pane">
+
+  <div id="notGoogleMsg" class="info-msg" hidden>
+    <p>Navigate to a Google search to capture AI results.</p>
+    <a href="https://www.google.com/search?q=what+is+ai+mode&udm=50" target="_blank" class="link-btn">Try AI Mode ↗</a>
+  </div>
+
+  <div id="captureForm" hidden>
+    <div class="meta-row">
+      <span class="query-label">Query</span>
+      <span class="query-text" id="queryText"></span>
+    </div>
+
+    <div class="field">
+      <label for="snapTitle">Title</label>
+      <input type="text" id="snapTitle" placeholder="Snapshot title">
+    </div>
+
+    <div class="field">
+      <label for="snapDesc">Notes</label>
+      <textarea id="snapDesc" rows="2" placeholder="Your notes…"></textarea>
+    </div>
+
+    <details class="ai-preview" id="aiDetails">
+      <summary id="aiSummary"></summary>
+      <div class="ai-body" id="aiBody"></div>
+    </details>
+
+    <div class="save-row">
+      <button id="saveLocal" class="btn-ghost">Save locally</button>
+      <button id="saveJsonbin" class="btn-primary">JSONbin</button>
+      <button id="saveGithub" class="btn-primary">GitHub</button>
+    </div>
+
+    <div id="saveStatus" class="status-line" hidden></div>
+  </div>
+
+</div>
+
+<!-- Library tab -->
+<div id="libraryTab" class="tab-pane" hidden>
+
+  <div class="lib-toolbar">
+    <button id="exportJsonbin" class="btn-sm">All → JSONbin</button>
+    <button id="exportGithub" class="btn-sm">All → GitHub</button>
+    <button id="clearAll" class="btn-sm btn-danger">Clear</button>
+  </div>
+
+  <div id="snapshotList"></div>
+  <div id="emptyMsg" class="empty-msg" hidden>No snapshots saved yet.</div>
+
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
